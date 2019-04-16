@@ -7,7 +7,7 @@
     "node": "10.x"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "node .",
     "dev": "nodemon .",
     "debug": "nodemon --inspect ."
   },
