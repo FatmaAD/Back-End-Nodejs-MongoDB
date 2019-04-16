@@ -1,4 +1,4 @@
-const Category = require("./../model/category");
+const Category = require("./../model/Category");
 const product = require("./../controllers/products");
 const createError = require("http-errors");
 const validator = require("validator");
