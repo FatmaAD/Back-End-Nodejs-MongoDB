@@ -71,12 +71,13 @@ schema.method("tokenGenerator", async function() {
 });
 
 //checks on a usertokens
-schema.method("getUserByToken", async function(token) {
+schema.static('getUserByToken', async function (token) {
   const decoded = await verify(token, secretKey);
-  const user = User.findById(decoded._id);
-  if (!user) throw new Error("User not found");
+  const user = await User.findById(decoded._id);
+  if (!user) throw new Error('user not found');
   return user;
 });
+
 
 const User = mongoose.model("User", schema);
 module.exports = User;

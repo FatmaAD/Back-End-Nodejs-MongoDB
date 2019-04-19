@@ -1,8 +1,13 @@
-const User = "./../model/User.js";
+const createError = require('http-errors');
+const User = require('./../model/User');
 
-module.exports = (req, res, next) => {
-  const { Authurization: token } = req.headers;
-  req.user = User.getUserByToken(token);
-  if(!req.user) throw new Error('Faild to find a matching user')
-  next()
+module.exports = async (req, res, next) => {
+    try {
+        const { authorization: token } = req.headers;
+        if (!token) throw new Error('token required');
+        req.user = await User.getUserByToken(token);
+        next();
+    } catch (err) {
+        next(createError(401, 'not-authenticated'));
+    }
 };
